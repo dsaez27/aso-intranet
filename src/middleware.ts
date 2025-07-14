@@ -2,40 +2,45 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { USER_SESSION_KEY } from './context/auth-context';
 
-// Este middleware se ejecuta en el servidor antes de cada solicitud.
-// Su propósito es proteger las rutas del dashboard, asegurando que solo
-// los usuarios autenticados puedan acceder a ellas.
-
 export function middleware(request: NextRequest) {
-  // 1. Obtiene la URL de inicio de sesión.
-  const loginUrl = request.nextUrl.clone();
-  loginUrl.pathname = '/login';
-
-  // 2. Extrae la cookie de sesión del usuario de la solicitud.
   const sessionCookie = request.cookies.get(USER_SESSION_KEY);
+  const { pathname } = request.nextUrl;
 
-  // 3. Define la ruta que estamos protegiendo (todas las sub-rutas de /dashboard).
-  const isDashboardRoute = request.nextUrl.pathname.startsWith('/dashboard');
+  const loginUrl = new URL('/login', request.url);
+  const dashboardUrl = new URL('/dashboard', request.url);
 
-  // Lógica de redirección:
-  // Si el usuario intenta acceder a una ruta del dashboard SIN una cookie de sesión,
-  // se le redirige a la página de inicio de sesión.
-  if (isDashboardRoute && !sessionCookie) {
-    return NextResponse.redirect(loginUrl);
+  // Si el usuario está autenticado (tiene la cookie)
+  if (sessionCookie) {
+    // Y está intentando acceder a /login o a la página raíz,
+    // redirigirlo al dashboard.
+    if (pathname === '/login' || pathname === '/') {
+      return NextResponse.redirect(dashboardUrl);
+    }
   }
 
-  // 4. Si la comprobación pasa, permite que la solicitud continúe.
+  // Si el usuario NO está autenticado (no tiene la cookie)
+  if (!sessionCookie) {
+    // Y está intentando acceder a cualquier ruta del dashboard,
+    // redirigirlo a la página de login.
+    if (pathname.startsWith('/dashboard')) {
+      return NextResponse.redirect(loginUrl);
+    }
+    // Si el usuario no autenticado está en la raíz, redirigirlo a login.
+    if (pathname === '/') {
+      return NextResponse.redirect(loginUrl);
+    }
+  }
+
+  // Si ninguna de las condiciones anteriores se cumple, permitir el acceso.
   return NextResponse.next();
 }
 
 // Configuración del matcher:
-// Esto asegura que el middleware solo se ejecute en las rutas especificadas,
-// lo cual es más eficiente que ejecutarlo en todas las solicitudes.
+// Esto asegura que el middleware se ejecute en las rutas especificadas.
 export const config = {
   matcher: [
-    // Aplica el middleware a todas las rutas dentro de /dashboard
+    '/',
+    '/login',
     '/dashboard/:path*',
-    // Excluye las rutas que no necesitan protección (ej. archivos estáticos, API, etc.)
-    // '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 };

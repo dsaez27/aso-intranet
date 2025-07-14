@@ -90,3 +90,9 @@ export async function deleteUser(id: string): Promise<void> {
   await connectToDatabase();
   await UserModel.findByIdAndDelete(id);
 }
+
+export async function getAllUsers(): Promise<User[]> {
+  await connectToDatabase();
+  const users = await UserModel.find({}).select('-password'); // Excluye la contraseña
+  return users.map(toPlainObject) as User[];
+}

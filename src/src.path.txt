@@ -1,0 +1,157 @@
+src/
+├── app/
+ |          ├── dashboard/
+ |           |          ├── analytics/
+ |           |           |          ├── __tests__/
+ |           |           |           |          └── page.test.tsx
+ |           |           |          └── page.tsx
+ |           |          ├── chat/
+ |           |           |          └── page.tsx
+ |           |          ├── inventory/
+ |           |           |          ├── __tests__/
+ |           |           |           |          └── page.test.tsx
+ |           |           |          └── page.tsx
+ |           |          ├── repairs/
+ |           |           |          ├── __tests__/
+ |           |           |           |          └── page.test.tsx
+ |           |           |          └── page.tsx
+ |           |          ├── requests/
+ |           |           |          ├── __tests__/
+ |           |           |           |          └── page.test.tsx
+ |           |           |          └── page.tsx
+ |           |          ├── settings/
+ |           |           |          ├── __tests__/
+ |           |           |           |          └── page.test.tsx
+ |           |           |          └── page.tsx
+ |           |          ├── users/
+ |           |           |          ├── __tests__/
+ |           |           |           |          └── page.test.tsx
+ |           |           |          └── page.tsx
+ |           |          ├── __tests__/
+ |           |           |          └── page.test.tsx
+ |           |          ├── layout.tsx
+ |           |          └── page.tsx
+ |          ├── login/
+ |           |          ├── __tests__/
+ |           |           |          └── page.test.tsx
+ |           |          └── page.tsx
+ |          ├── app.path.txt
+ |          ├── favicon.ico
+ |          ├── globals.css
+ |          ├── layout.tsx
+ |          └── page.tsx
+├── components/
+ |          ├── analytics/
+ |           |          ├── analytics-dashboard.tsx
+ |           |          ├── category-chart.tsx
+ |           |          ├── kpi-card.tsx
+ |           |          ├── request-status-chart.tsx
+ |           |          └── status-chart.tsx
+ |          ├── chat/
+ |           |          └── image-preview-dialog.tsx
+ |          ├── home/
+ |           |          └── home-dashboard.tsx
+ |          ├── inventory/
+ |           |          ├── inventory-detail-dialog.tsx
+ |           |          ├── inventory-form-dialog.tsx
+ |           |          ├── inventory-page.tsx
+ |           |          ├── inventory-table.tsx
+ |           |          └── inventory-toolbar.tsx
+ |          ├── repairs/
+ |           |          ├── repair-request-form-dialog.tsx
+ |           |          ├── repairs-page.tsx
+ |           |          └── repairs-table.tsx
+ |          ├── requests/
+ |           |          ├── request-form-dialog.tsx
+ |           |          ├── requests-page.tsx
+ |           |          └── requests-table.tsx
+ |          ├── ui/
+ |           |          ├── __tests__/
+ |           |           |          ├── button.test.tsx
+ |           |           |          └── card.test.tsx
+ |           |          ├── accordion.tsx
+ |           |          ├── alert-dialog.tsx
+ |           |          ├── alert.tsx
+ |           |          ├── avatar.tsx
+ |           |          ├── badge.tsx
+ |           |          ├── button.tsx
+ |           |          ├── calendar.tsx
+ |           |          ├── card.tsx
+ |           |          ├── carousel.tsx
+ |           |          ├── chart.tsx
+ |           |          ├── checkbox.tsx
+ |           |          ├── collapsible.tsx
+ |           |          ├── dialog.tsx
+ |           |          ├── dropdown-menu.tsx
+ |           |          ├── form.tsx
+ |           |          ├── input.tsx
+ |           |          ├── label.tsx
+ |           |          ├── menubar.tsx
+ |           |          ├── pagination.tsx
+ |           |          ├── popover.tsx
+ |           |          ├── progress.tsx
+ |           |          ├── radio-group.tsx
+ |           |          ├── scroll-area.tsx
+ |           |          ├── select.tsx
+ |           |          ├── separator.tsx
+ |           |          ├── sheet.tsx
+ |           |          ├── sidebar.tsx
+ |           |          ├── skeleton.tsx
+ |           |          ├── slider.tsx
+ |           |          ├── switch.tsx
+ |           |          ├── table.tsx
+ |           |          ├── tabs.tsx
+ |           |          ├── textarea.tsx
+ |           |          ├── toast.tsx
+ |           |          ├── toaster.tsx
+ |           |          └── tooltip.tsx
+ |          ├── users/
+ |           |          ├── user-form-dialog.tsx
+ |           |          ├── user-management-page.tsx
+ |           |          └── user-table.tsx
+ |          ├── theme-provider.tsx
+ |          └── theme-switcher.tsx
+├── context/
+ |          ├── auth-context.tsx
+ |          ├── inventory-context.tsx
+ |          ├── notification-context.tsx
+ |          ├── repair-request-context.tsx
+ |          ├── request-context.tsx
+ |          └── user-context.tsx
+├── hooks/
+ |          ├── use-auth.ts
+ |          ├── use-csv-import.ts
+ |          ├── use-entity-form.ts
+ |          ├── use-inventory.ts
+ |          ├── use-mobile.tsx
+ |          ├── use-repair-requests.ts
+ |          ├── use-requests.ts
+ |          ├── use-toast.ts
+ |          └── use-users.ts
+├── lib/
+ |          ├── csv.ts
+ |          ├── mongodb.ts
+ |          └── utils.ts
+├── models/
+ |          ├── inventory-model.ts
+ |          ├── material-request-model.ts
+ |          ├── notification-model.ts
+ |          ├── repair-request-model.ts
+ |          ├── user-model.ts
+ |          └── User.ts
+├── services/
+ |          ├── auth-service.ts
+ |          ├── inventory-service.ts
+ |          ├── notification-service.ts
+ |          ├── repair-request-service.ts
+ |          ├── request-service.ts
+ |          └── user-service.ts
+├── types/
+ |          ├── chat.ts
+ |          ├── index.ts
+ |          ├── inventory.ts
+ |          ├── request.ts
+ |          └── user.ts
+├── .env
+├── middleware.ts
+└── src.path.txt

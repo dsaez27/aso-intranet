@@ -9,35 +9,32 @@ import type { User } from '@/types';
 // Debes implementar una comparación segura usando bcrypt en un entorno real.
 
 export async function loginUser(email: string, password: string): Promise<User | null> {
-    try {
-        const userWithHashedPassword = await getUserByEmail(email);
-        
-        // ===================================================================
-        // AVISO DE SEGURIDAD IMPORTANTE
-        // ===================================================================
-        // La siguiente comprobación de contraseña es solo para fines de 
-        // demostración. En una aplicación de producción, NUNCA debes 
-        // almacenar o comparar contraseñas en texto plano.
-        //
-        // En su lugar, utiliza una biblioteca de hashing segura como `bcrypt`
-        // para comparar la contraseña proporcionada con el hash almacenado.
-        //
-        // Ejemplo con bcrypt:
-        // const match = await bcrypt.compare(password, user.passwordHash);
-        // if (user && match) { ... }
-        //
-        // Para esta demo, simulamos el hash y la comparación.
-        // ===================================================================
-        const mockHashedPassword = `hashed_${password}`;
-
-        if (userWithHashedPassword && (userWithHashedPassword as any).password === mockHashedPassword) {
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const { password, ...userWithoutPassword } = userWithHashedPassword as any;
-            return userWithoutPassword;
-        }
-        return null;
-    } catch (error) {
-        console.error("Login failed", error);
-        return null;
+  try {
+    console.log('Auth service - attempting login for:', email); // Debug
+    const userWithHashedPassword = await getUserByEmail(email);
+    console.log('Auth service - user found:', userWithHashedPassword); // Debug
+    
+    if (!userWithHashedPassword) {
+      console.log('Auth service - no user found'); // Debug
+      return null;
     }
+    
+    const mockHashedPassword = `hashed_${password}`;
+    console.log('Auth service - comparing passwords:', { 
+      provided: mockHashedPassword, 
+      stored: (userWithHashedPassword as any)?.password 
+    }); // Debug
+
+    if ((userWithHashedPassword as any).password === mockHashedPassword) {
+      const { password: _, ...userWithoutPassword } = userWithHashedPassword as any;
+      console.log('Auth service - login successful for user:', userWithoutPassword); // Debug
+      return userWithoutPassword;
+    }
+    
+    console.log('Auth service - password mismatch'); // Debug
+    return null;
+  } catch (error) {
+    console.error("Auth service - login failed:", error);
+    return null;
+  }
 }
